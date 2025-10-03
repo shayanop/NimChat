@@ -73,7 +73,7 @@ Nim Scribe Chat is a lightweight chat frontend built to work with NVIDIA’s NIM
   def hello():
       print("Hello, world!")
   ```
-  ```
+  
 * The frontend renderer (using a Markdown library + syntax highlighter) will convert it into a styled, interactive code block.
 
 ---
