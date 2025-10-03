@@ -69,7 +69,7 @@ Nim Scribe Chat is a lightweight chat frontend built to work with NVIDIA’s NIM
 * The AI’s response should be returned **in Markdown**.
 * For any code or technical response, the model **must** use fenced code blocks with proper language tags, such as:
 
-  ```python
+  python
   def hello():
       print("Hello, world!")
   ```
