@@ -163,7 +163,7 @@ Create a `.env` file in the project root:
 NVIDIA_API_KEY=your_real_key
 PORT=3001
 ```
-`.env` is already git-ignored.
+
 
 ### 4) Start the backend
 ```bash
@@ -181,43 +181,3 @@ The project is configured to proxy API requests during development.
 ```bash
 npm run dev
 ```
-Open the Local/Network URL printed by Vite.
-
-Optional override: point the proxy to a different backend host
-```bash
-# PowerShell (one shell session)
-$env:VITE_BACKEND_URL="http://<BACKEND_HOST>:3001"; npm run dev
-```
-
-### 6) Access from another device on the same network
-- Find your dev machine IP (e.g., `192.168.x.x`).
-- Open Windows Firewall for inbound TCP 8080 (frontend). Backend (3001) is not required if using the proxy.
-- From the other device, open: `http://<DEV_MACHINE_IP>:8080` (or the port Vite prints).
-- If you prefer to bypass the proxy and call backend directly, open 3001 as well and use:
-  - `VITE_BACKEND_URL=http://<DEV_MACHINE_IP>:3001` before `npm run dev`.
-
-### 7) Using ngrok (optional)
-Expose the frontend only:
-```bash
-ngrok http 8080
-```
-- Add the generated host to `server.allowedHosts` in `vite.config.ts` or set:
-```bash
-$env:VITE_ALLOWED_HOST="<your-subdomain>.ngrok-free.app"; npm run dev
-```
-Expose backend (only if you are not using the proxy):
-```bash
-ngrok http 3001
-$env:VITE_BACKEND_URL="https://<backend-subdomain>.ngrok-free.app"; npm run dev
-```
-
-### 8) NVIDIA model and endpoint
-- Backend uses the OpenAI-compatible NIM endpoint: `https://integrate.api.nvidia.com/v1`
-- Default model in `server.js`: `meta/llama-3.1-8b-instruct`
-- If you see 404 from NVIDIA, switch to a model enabled for your account/region.
-
-### 9) Troubleshooting
-- "Failed to fetch" when using ngrok: ensure `server.allowedHosts` in `vite.config.ts` includes your ngrok host, then restart dev.
-- Remote address shows `[::1]:3001`: that is expected on the dev machine; from another device use the Vite proxy via the frontend URL.
-- CORS: the backend uses `cors()` and accepts cross-origin by default. If you want to restrict it, add `cors({ origin: '<your-frontend-origin>' })` in `server.js`.
-- Ensure `.env` is present and `NVIDIA_API_KEY` is valid; restart the backend after changes.
