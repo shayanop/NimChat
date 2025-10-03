@@ -85,9 +85,9 @@ You may want to prepend a system message or instruction like:
 ````
 You are a helpful AI assistant. When providing code, always format it using Markdown fenced code blocks with the correct language tag. For example:
 
-```python
+python
 print("Hello, world!")
-```
+
 ````
 
 
